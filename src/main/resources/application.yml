@@ -1,0 +1,13 @@
+server:
+  ssl:
+    key-store: C:\Users\Пользователь\.keystore\hospital.p12
+    key-store-password: password
+    key-store-type: pkcs12
+    key-alias: adminbackend 
+    key-password: password
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hospital
+    username: admin_backend
+    password: admin_backend_password
