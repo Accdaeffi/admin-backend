@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.Disease;
 
-public interface DiseaseRepository extends CrudRepository<Disease, String> {
+public interface DiseaseRepository extends CrudRepository<Disease, Integer> {
 
 }

@@ -13,7 +13,7 @@ import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.Role;
 
 @Entity
 @Data
-@Table(name = "login_info")
+@Table(name = "login_info", schema = "public")
 public class LoginInfo {
 	
     @Id

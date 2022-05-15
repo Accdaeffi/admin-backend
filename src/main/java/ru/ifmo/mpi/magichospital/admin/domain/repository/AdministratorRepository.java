@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Administrator;
 
-public interface AdministratorRepository extends CrudRepository<Administrator, String> {
+public interface AdministratorRepository extends CrudRepository<Administrator, Integer> {
 	Optional<Administrator> findByLogin(String login);
 }

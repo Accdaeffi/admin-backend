@@ -11,3 +11,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/hospital
     username: admin_backend
     password: admin_backend_password
+    
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true

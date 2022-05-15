@@ -30,12 +30,15 @@ public class DiseaseCase {
     private Patient patient;
     
     @ManyToOne(targetEntity = Administrator.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "patient_id")
+    @JoinColumn(name = "administrator_id")
     private Administrator administrator;
         
     @ManyToOne(targetEntity = Healer.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "healer_id")
     private Healer healer;
+    
+    @Column(name = "patient_complaints")
+    private String patientComplaints;
     
     @Column(name = "registration_time")
     private LocalDateTime registrationTime;
