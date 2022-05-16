@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.github.rkpunjal.sqlsafe.SqlSafeUtil;
+
 import ru.ifmo.mpi.magichospital.admin.domain.dao.LoginInfo;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.LoginInfoRepository;
+import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -20,6 +23,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     
 	@Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		if (!SqlSafeUtil.isSqlInjectionSafe(userName)) {
+            throw new UsernameNotFoundException("Possible sql injection attack!");
+        }
+		
         Optional<LoginInfo> optionalDbUser = loginInfoRepository.findByLogin(userName);
         
         if (optionalDbUser.isPresent()) {
