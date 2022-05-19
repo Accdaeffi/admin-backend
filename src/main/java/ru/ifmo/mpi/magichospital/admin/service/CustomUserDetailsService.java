@@ -13,7 +13,6 @@ import com.github.rkpunjal.sqlsafe.SqlSafeUtil;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.LoginInfo;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.LoginInfoRepository;
-import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

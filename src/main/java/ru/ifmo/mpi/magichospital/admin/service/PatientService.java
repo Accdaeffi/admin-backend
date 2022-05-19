@@ -70,6 +70,7 @@ public class PatientService {
 		
 		if (optionalStatus.isPresent()) {
 			Patient patient = new Patient(patientDto, optionalStatus.get());
+			patient.setId(0);
 			
 			if (patient.getRegistrationTime() == null) {
 				patient.setRegistrationTime(LocalDateTime.now());

@@ -6,14 +6,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class PatientLongDTO extends PatientShortDTO {
-	
-	private int id;
-    private String name;
-    private String surname;
     
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty(value = "isMale")
