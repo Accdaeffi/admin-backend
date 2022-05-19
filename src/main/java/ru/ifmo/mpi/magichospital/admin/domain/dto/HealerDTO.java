@@ -2,14 +2,18 @@ package ru.ifmo.mpi.magichospital.admin.domain.dto;
 
 import java.time.LocalDate;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
 
-@Getter
+@Data
 public class HealerDTO {
 	
     private String name;
     private String surname;
+    
+    @JsonProperty("isMale")
     private boolean isMale;
     private LocalDate workStartDate;
     

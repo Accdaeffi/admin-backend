@@ -13,14 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "patient")
 public class Patient {
-	
-    @Id
+
+	@Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -43,5 +46,14 @@ public class Patient {
     @ManyToOne(targetEntity = SocialStatus.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "social_status")
     private SocialStatus socialStatus;
+    
+    public Patient(PatientLongDTO patientDto, SocialStatus status) {
+    	this.name = patientDto.getName();
+    	this.surname = patientDto.getSurname();
+    	this.isMale = patientDto.isMale();
+    	this.isMage = patientDto.isMage();
+    	this.registrationTime = patientDto.getRegistrationTime();
+    	this.socialStatus = status;
+	}
 
 }

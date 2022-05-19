@@ -1,5 +1,6 @@
 package ru.ifmo.mpi.magichospital.admin.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.github.rkpunjal.sqlsafe.SqlSafeUtil;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
+import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.PatientRepository;
+import ru.ifmo.mpi.magichospital.admin.domain.repository.SocialStatusRepository;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 
@@ -19,10 +23,15 @@ public class PatientService {
 	
 	@Autowired
 	PatientRepository patientRepository;
+	
+	@Autowired
+	SocialStatusRepository socialStatusRepository;
 
 	public List<Patient> getPatients() {
+		
 		List<Patient> result = new ArrayList<>();
 		patientRepository.findAll().forEach(result::add);
+		
 		return result;
 	}
 	
@@ -52,7 +61,25 @@ public class PatientService {
 		} else {
 			throw new NoEntityWithSuchIdException("No patient with such id!");
 		}
-
+	}
+	
+	public Patient addPatient(PatientLongDTO patientDto) 
+			throws NoEntityWithSuchIdException {
+		
+		Optional<SocialStatus> optionalStatus = socialStatusRepository.findByCode(patientDto.getSocialStatus());
+		
+		if (optionalStatus.isPresent()) {
+			Patient patient = new Patient(patientDto, optionalStatus.get());
+			
+			if (patient.getRegistrationTime() == null) {
+				patient.setRegistrationTime(LocalDateTime.now());
+			}
+			
+			patient = patientRepository.save(patient);
+			return patient;
+		} else {
+			throw new NoEntityWithSuchIdException("No social status with such code!");
+		}
 	}
 
 }

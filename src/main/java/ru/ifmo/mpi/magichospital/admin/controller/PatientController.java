@@ -6,11 +6,15 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.ListPatientDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientShortDTO;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 import ru.ifmo.mpi.magichospital.admin.service.PatientService;
@@ -25,25 +29,36 @@ public class PatientController {
 	PatientService patientService;
 	
 	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/patients")
-	public List<PatientDTO> getPatients(@RequestParam(value="name", required = false) String searchString) 
+	public ListPatientDTO getPatients(@RequestParam(value="name", required = false) String searchString) 
 			throws PossibleSqlInjectionAttackException {	
+		List<PatientShortDTO> patients;
+		
 		if (searchString == null) {
-			return convertPateintListToPateintShortDTOList(patientService.getPatients());
+			patients = convertPateintListToPateintShortDTOList(patientService.getPatients());
 		} else {
-			return convertPateintListToPateintShortDTOList(patientService.getPatientsByName(searchString));
+			patients = convertPateintListToPateintShortDTOList(patientService.getPatientsByName(searchString));
 		}
+		
+		return new ListPatientDTO(patients);
 	}
 	
 	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/patient/{id}")
-	public PatientDTO getPatient(@PathVariable int id) 
+	public PatientLongDTO getPatient(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Patient patient = patientService.getPatient(id);
-		return PatientDTO.fromPatientFullDTO(patient);
+		return PatientLongDTO.fromPatientLongDTO(patient);
 	}
 	
-	private List<PatientDTO> convertPateintListToPateintShortDTOList(List<Patient> patients) {
-		List<PatientDTO> patientDTOs =  patients.stream()
-				.map(patient -> PatientDTO.fromPatientShortDTO(patient))
+	@PostMapping(API_PREFIX+ADMIN_PREFIX+"/patients")
+	public PatientLongDTO addPatient(@RequestBody PatientLongDTO patient) 
+			throws NoEntityWithSuchIdException {
+		Patient savedPatient = patientService.addPatient(patient);
+		return PatientLongDTO.fromPatientLongDTO(savedPatient);
+	}
+	
+	private List<PatientShortDTO> convertPateintListToPateintShortDTOList(List<Patient> patients) {
+		List<PatientShortDTO> patientDTOs =  patients.stream()
+				.map(patient -> PatientLongDTO.fromPatientShortDTO(patient))
 				.collect(Collectors.toList());
 			
 		return patientDTOs;
