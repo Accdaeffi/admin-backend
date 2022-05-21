@@ -47,7 +47,7 @@ public class DiseaseCase {
     @JoinColumn(name = "disease_id")
     private Disease disease;
  
-    @Column(name = "action")
-    private String action;    
+    @Column(name = "actions")
+    private String actions;    
 
 }

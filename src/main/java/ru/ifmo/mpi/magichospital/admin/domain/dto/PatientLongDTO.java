@@ -1,6 +1,8 @@
 package ru.ifmo.mpi.magichospital.admin.domain.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +29,9 @@ public class PatientLongDTO extends PatientShortDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String socialStatus;
     
+    private List<DiseaseCaseDTO> diseaseCases;
+    
+    
     public static PatientLongDTO fromPatientLongDTO(Patient patient) {
     	PatientLongDTO patientDTO = new PatientLongDTO(); 
     	
@@ -37,6 +42,11 @@ public class PatientLongDTO extends PatientShortDTO {
     	patientDTO.isMale = patient.isMale();
     	patientDTO.isMage = patient.isMage();
     	patientDTO.registrationTime = patient.getRegistrationTime();
+    	patientDTO.setDiseaseCases(
+    			patient.getDiseaseCases().stream()
+    				.map(disease -> new DiseaseCaseDTO(disease))
+    				.collect(Collectors.toList())
+    	);
     	
     	return patientDTO;
     }

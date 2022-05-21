@@ -1,7 +1,9 @@
 package ru.ifmo.mpi.magichospital.admin.domain.dao;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
 
@@ -46,6 +50,10 @@ public class Patient {
     @ManyToOne(targetEntity = SocialStatus.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "social_status")
     private SocialStatus socialStatus;
+    
+    @ToString.Exclude
+    @OneToMany(mappedBy = "patient", targetEntity = DiseaseCase.class, cascade = CascadeType.ALL, orphanRemoval = false)
+    private List<DiseaseCase> diseaseCases;
     
     public Patient(PatientLongDTO patientDto, SocialStatus status) {
     	this.name = patientDto.getName();
