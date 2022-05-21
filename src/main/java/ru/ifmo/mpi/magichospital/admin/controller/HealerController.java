@@ -18,18 +18,14 @@ import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.healer.HealerLongDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.healer.HealerShortDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.list.ListHealerDTO;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.list.ListPatientDTO;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientLongDTO;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 import ru.ifmo.mpi.magichospital.admin.mappers.HealerMapper;
 import ru.ifmo.mpi.magichospital.admin.service.HealerService;
+import ru.ifmo.mpi.magichospital.admin.util.PathConstants;
 
 @RestController
 public class HealerController {
-
-	private static final String API_PREFIX = "/api/v1";
-	private static final String ADMIN_PREFIX = "/admin";
 	
 	@Autowired 
 	HealerService healerService;
@@ -43,10 +39,10 @@ public class HealerController {
 	@ApiResponses(value = { 
 			  @ApiResponse(responseCode = "200", description = "Get list", 
 			    content = { @Content(mediaType = "application/json", 
-			      schema = @Schema(implementation = ListPatientDTO.class)) }),
+			      schema = @Schema(implementation = ListHealerDTO.class)) }),
 			  @ApiResponse(responseCode = "400", description = "Incorrect values (SQL injection, for example). Full description in \"message\" field", 
 			    content = @Content) })
-	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/healers")
+	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/healers")
 	public ListHealerDTO getHealers(@RequestParam(value="name", required = false) String searchString) 
 			throws PossibleSqlInjectionAttackException {	
 		List<HealerShortDTO> healers;
@@ -64,10 +60,10 @@ public class HealerController {
 	@ApiResponses(value = { 
 			  @ApiResponse(responseCode = "200", description = "Get healer", 
 			    content = { @Content(mediaType = "application/json", 
-			      schema = @Schema(implementation = PatientLongDTO.class)) }),
+			      schema = @Schema(implementation = HealerLongDTO.class)) }),
 			  @ApiResponse(responseCode = "400", description = "No patient with such id. Full description in \"message\" field", 
 			    content = @Content) })
-	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/healer/{id}")
+	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/healer/{id}")
 	public HealerLongDTO getPatient(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Healer healer = healerService.getHealer(id);

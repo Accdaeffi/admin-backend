@@ -24,12 +24,10 @@ import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 import ru.ifmo.mpi.magichospital.admin.mappers.PatientMapper;
 import ru.ifmo.mpi.magichospital.admin.service.PatientService;
+import ru.ifmo.mpi.magichospital.admin.util.PathConstants;
 
 @RestController
 public class PatientController {
-
-	private static final String API_PREFIX = "/api/v1";
-	private static final String ADMIN_PREFIX = "/admin";
 	
 	@Autowired 
 	PatientService patientService;
@@ -44,7 +42,7 @@ public class PatientController {
 			      schema = @Schema(implementation = ListPatientDTO.class)) }),
 			  @ApiResponse(responseCode = "400", description = "Incorrect values (SQL injection, for example). Full description in \"message\" field", 
 			    content = @Content) })
-	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/patients")
+	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/patients")
 	public ListPatientDTO getPatients(@RequestParam(value="name", required = false) String searchString) 
 			throws PossibleSqlInjectionAttackException {	
 		List<PatientShortDTO> patients;
@@ -65,7 +63,7 @@ public class PatientController {
 			      schema = @Schema(implementation = PatientLongDTO.class)) }),
 			  @ApiResponse(responseCode = "400", description = "No patient with such id. Full description in \"message\" field", 
 			    content = @Content) })
-	@GetMapping(API_PREFIX+ADMIN_PREFIX+"/patient/{id}")
+	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/patient/{id}")
 	public PatientLongDTO getPatient(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Patient patient = patientService.getPatient(id);
@@ -79,7 +77,7 @@ public class PatientController {
 			      schema = @Schema(implementation = PatientLongDTO.class)) }),
 			  @ApiResponse(responseCode = "400", description = "Incorrect values (SQL injection, for example). Full description in \"message\" field", 
 			    content = @Content) })
-	@PostMapping(API_PREFIX+ADMIN_PREFIX+"/patients")
+	@PostMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/patients")
 	public PatientLongDTO addPatient(@RequestBody PatientLongDTO patient) 
 			throws NoEntityWithSuchIdException {
 		Patient savedPatient = patientService.addPatient(patient);

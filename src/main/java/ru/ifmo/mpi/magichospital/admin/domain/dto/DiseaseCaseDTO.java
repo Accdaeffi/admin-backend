@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 public class DiseaseCaseDTO {
     
     private int id;
-    private String registrator;
-    private String healer;
+    private int registratorId;
+    private int healerId;
+    private int patientId;
+    private int diseaseId;
     private String patientComplaints;
     private LocalDateTime registrationTime;
-    private String disease;
     private String actions;     
 	
 }
