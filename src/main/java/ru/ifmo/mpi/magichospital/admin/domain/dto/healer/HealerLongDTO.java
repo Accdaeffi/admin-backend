@@ -1,4 +1,4 @@
-package ru.ifmo.mpi.magichospital.admin.domain.dto;
+package ru.ifmo.mpi.magichospital.admin.domain.dto.healer;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class HealerDTO {
+public class HealerLongDTO {
 	
     private String name;
     private String surname;

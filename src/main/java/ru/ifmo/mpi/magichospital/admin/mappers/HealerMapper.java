@@ -1,12 +1,25 @@
 package ru.ifmo.mpi.magichospital.admin.mappers;
 
-import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.HealerDTO;
+import org.springframework.stereotype.Service;
 
+import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.healer.HealerLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.healer.HealerShortDTO;
+
+@Service
 public class HealerMapper {
 	
-	public static HealerDTO toDTO(Healer healer) {
-		HealerDTO dto = new HealerDTO();
+	public HealerShortDTO toShortDTO(Healer healer) {
+		HealerShortDTO dto = new HealerShortDTO();
+		
+    	dto.setName(healer.getName());
+    	dto.setSurname(healer.getSurname());    
+    	
+    	return dto;
+	}
+	
+	public HealerLongDTO toLongDTO(Healer healer) {
+		HealerLongDTO dto = new HealerLongDTO();
 		
     	dto.setName(healer.getName());
     	dto.setSurname(healer.getSurname());    	

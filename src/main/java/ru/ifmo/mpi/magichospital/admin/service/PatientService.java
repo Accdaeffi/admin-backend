@@ -12,7 +12,7 @@ import com.github.rkpunjal.sqlsafe.SqlSafeUtil;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientLongDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.PatientRepository;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.SocialStatusRepository;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
@@ -27,6 +27,9 @@ public class PatientService {
 	
 	@Autowired
 	SocialStatusRepository socialStatusRepository;
+	
+	@Autowired 
+	PatientMapper patientMapper;
 
 	public List<Patient> getPatients() {
 		
@@ -70,7 +73,7 @@ public class PatientService {
 		Optional<SocialStatus> optionalStatus = socialStatusRepository.findByCode(patientDto.getSocialStatus());
 		
 		if (optionalStatus.isPresent()) {
-			Patient patient = PatientMapper.fromDTO(patientDto, optionalStatus.get());
+			Patient patient = patientMapper.fromDTO(patientDto, optionalStatus.get());
 			patient.setId(0);
 			
 			if (patient.getRegistrationTime() == null) {

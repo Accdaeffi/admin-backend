@@ -20,7 +20,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientLongDTO;
 
 @Entity
 @Data

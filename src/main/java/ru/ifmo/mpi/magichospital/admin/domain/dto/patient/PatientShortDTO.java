@@ -1,4 +1,4 @@
-package ru.ifmo.mpi.magichospital.admin.domain.dto;
+package ru.ifmo.mpi.magichospital.admin.domain.dto.patient;
 
 import lombok.Data;
 

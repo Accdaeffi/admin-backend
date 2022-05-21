@@ -17,9 +17,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.ListPatientDTO;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientShortDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.list.ListPatientDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientShortDTO;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
 import ru.ifmo.mpi.magichospital.admin.mappers.PatientMapper;
@@ -33,6 +33,9 @@ public class PatientController {
 	
 	@Autowired 
 	PatientService patientService;
+	
+	@Autowired
+	PatientMapper mapper;
 	
 	@Operation(summary = "Get list of patients")
 	@ApiResponses(value = { 
@@ -66,7 +69,7 @@ public class PatientController {
 	public PatientLongDTO getPatient(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Patient patient = patientService.getPatient(id);
-		return PatientMapper.toLongDTO(patient);
+		return mapper.toLongDTO(patient);
 	}
 	
 	@Operation(summary = "Create new patient")
@@ -80,12 +83,12 @@ public class PatientController {
 	public PatientLongDTO addPatient(@RequestBody PatientLongDTO patient) 
 			throws NoEntityWithSuchIdException {
 		Patient savedPatient = patientService.addPatient(patient);
-		return PatientMapper.toLongDTO(savedPatient);
+		return mapper.toLongDTO(savedPatient);
 	}
 	
 	private List<PatientShortDTO> convertPateintListToPateintShortDTOList(List<Patient> patients) {
 		List<PatientShortDTO> patientDTOs =  patients.stream()
-				.map(patient -> PatientMapper.toShortDTO(patient))
+				.map(patient -> mapper.toShortDTO(patient))
 				.collect(Collectors.toList());
 			
 		return patientDTOs;

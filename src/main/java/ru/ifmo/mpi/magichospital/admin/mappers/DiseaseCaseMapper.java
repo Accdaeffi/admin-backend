@@ -1,13 +1,16 @@
 package ru.ifmo.mpi.magichospital.admin.mappers;
 
+import org.springframework.stereotype.Service;
+
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Administrator;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.DiseaseCase;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.DiseaseCaseDTO;
 
+@Service
 public class DiseaseCaseMapper {
 
-    public static DiseaseCaseDTO toDTO(DiseaseCase diseaseCase) {
+    public DiseaseCaseDTO toDTO(DiseaseCase diseaseCase) {
     	DiseaseCaseDTO dto = new DiseaseCaseDTO(); 
     	
     	dto.setId(diseaseCase.getId());

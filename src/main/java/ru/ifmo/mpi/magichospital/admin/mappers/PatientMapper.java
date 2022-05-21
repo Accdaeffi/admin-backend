@@ -2,14 +2,21 @@ package ru.ifmo.mpi.magichospital.admin.mappers;
 
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.SocialStatus;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
-import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientShortDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientLongDTO;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.patient.PatientShortDTO;
 
+@Service
 public class PatientMapper {
+	
+	@Autowired
+	DiseaseCaseMapper diseaseCaseMapper;
 
-    public static PatientShortDTO toShortDTO(Patient patient) {
+    public PatientShortDTO toShortDTO(Patient patient) {
     	PatientShortDTO patientDTO = new PatientShortDTO(); 
     	
     	patientDTO.setId(patient.getId());   
@@ -19,7 +26,7 @@ public class PatientMapper {
     	return patientDTO;
     }
 	
-    public static PatientLongDTO toLongDTO(Patient patient) {
+    public PatientLongDTO toLongDTO(Patient patient) {
     	PatientLongDTO patientDTO = new PatientLongDTO(); 
     	
     	patientDTO.setId(patient.getId());   
@@ -33,14 +40,14 @@ public class PatientMapper {
 
     	patientDTO.setDiseaseCases(
     			patient.getDiseaseCases().stream()
-    				.map(disease -> DiseaseCaseMapper.toDTO(disease))
+    				.map(disease -> diseaseCaseMapper.toDTO(disease))
     				.collect(Collectors.toList())
     	);
     	
     	return patientDTO;
     }
 	
-    public static Patient fromDTO(PatientLongDTO patientDto, SocialStatus status) {
+    public Patient fromDTO(PatientLongDTO patientDto, SocialStatus status) {
     	Patient dao = new Patient();
     	
     	dao.setName(patientDto.getName());

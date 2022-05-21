@@ -1,4 +1,4 @@
-package ru.ifmo.mpi.magichospital.admin.domain.dto;
+package ru.ifmo.mpi.magichospital.admin.domain.dto.patient;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import ru.ifmo.mpi.magichospital.admin.domain.dto.DiseaseCaseDTO;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
