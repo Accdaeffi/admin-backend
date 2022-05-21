@@ -5,9 +5,10 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
-import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class HealerDTO {
 	
     private String name;
@@ -21,15 +22,5 @@ public class HealerDTO {
     private int queue;
     
     private String socialStatus;
-	
-	public HealerDTO(Healer healer) {
-    	this.name = healer.getName();
-    	this.surname = healer.getSurname();    	
-    	this.isMale = healer.isMale();
-    	this.workStartDate = healer.getWorkStartDate();
-    	this.socialStatus = healer.getSocialStatus().getName();
-    	this.healerPower = healer.getHealerPower();
-    	this.queue = healer.getHealerPower();
-	}
 
 }

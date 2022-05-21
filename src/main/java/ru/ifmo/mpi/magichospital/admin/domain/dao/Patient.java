@@ -1,6 +1,7 @@
 package ru.ifmo.mpi.magichospital.admin.domain.dao;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -53,7 +54,7 @@ public class Patient {
     
     @ToString.Exclude
     @OneToMany(mappedBy = "patient", targetEntity = DiseaseCase.class, cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<DiseaseCase> diseaseCases;
+    private List<DiseaseCase> diseaseCases = new ArrayList<>();
     
     public Patient(PatientLongDTO patientDto, SocialStatus status) {
     	this.name = patientDto.getName();

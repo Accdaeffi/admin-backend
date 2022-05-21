@@ -17,6 +17,7 @@ import ru.ifmo.mpi.magichospital.admin.domain.repository.PatientRepository;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.SocialStatusRepository;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
+import ru.ifmo.mpi.magichospital.admin.mappers.PatientMapper;
 
 @Service
 public class PatientService {
@@ -69,7 +70,7 @@ public class PatientService {
 		Optional<SocialStatus> optionalStatus = socialStatusRepository.findByCode(patientDto.getSocialStatus());
 		
 		if (optionalStatus.isPresent()) {
-			Patient patient = new Patient(patientDto, optionalStatus.get());
+			Patient patient = PatientMapper.fromDTO(patientDto, optionalStatus.get());
 			patient.setId(0);
 			
 			if (patient.getRegistrationTime() == null) {

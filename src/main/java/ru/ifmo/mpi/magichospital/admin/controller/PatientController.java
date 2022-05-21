@@ -22,6 +22,7 @@ import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientLongDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.PatientShortDTO;
 import ru.ifmo.mpi.magichospital.admin.exception.NoEntityWithSuchIdException;
 import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackException;
+import ru.ifmo.mpi.magichospital.admin.mappers.PatientMapper;
 import ru.ifmo.mpi.magichospital.admin.service.PatientService;
 
 @RestController
@@ -65,7 +66,7 @@ public class PatientController {
 	public PatientLongDTO getPatient(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Patient patient = patientService.getPatient(id);
-		return PatientLongDTO.fromPatientLongDTO(patient);
+		return PatientMapper.toLongDTO(patient);
 	}
 	
 	@Operation(summary = "Create new patient")
@@ -79,12 +80,12 @@ public class PatientController {
 	public PatientLongDTO addPatient(@RequestBody PatientLongDTO patient) 
 			throws NoEntityWithSuchIdException {
 		Patient savedPatient = patientService.addPatient(patient);
-		return PatientLongDTO.fromPatientLongDTO(savedPatient);
+		return PatientMapper.toLongDTO(savedPatient);
 	}
 	
 	private List<PatientShortDTO> convertPateintListToPateintShortDTOList(List<Patient> patients) {
 		List<PatientShortDTO> patientDTOs =  patients.stream()
-				.map(patient -> PatientLongDTO.fromPatientShortDTO(patient))
+				.map(patient -> PatientMapper.toShortDTO(patient))
 				.collect(Collectors.toList());
 			
 		return patientDTOs;
