@@ -1,28 +1,24 @@
-package ru.ifmo.mpi.magichospital.admin.domain.dto.healer;
+package ru.ifmo.mpi.magichospital.admin.domain.dto;
 
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-public class HealerLongDTO extends HealerShortDTO {
+public class AdministratorLongDTO {
 	
+    private int id;
     private String name;
     private String surname;
     
     @JsonProperty("isMale")
     private boolean isMale;
+    
     private LocalDate workStartDate;
-    
-    private int healerPower;
-    private int queue;
-    
     private String socialStatus;
-
+    
 }

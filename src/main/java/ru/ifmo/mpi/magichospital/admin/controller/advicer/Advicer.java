@@ -1,4 +1,4 @@
-package ru.ifmo.mpi.magichospital.admin.controller;
+package ru.ifmo.mpi.magichospital.admin.controller.advicer;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

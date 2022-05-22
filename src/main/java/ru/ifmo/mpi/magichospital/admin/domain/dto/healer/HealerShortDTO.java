@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HealerShortDTO {
 	
+	private int id;
     private String name;
     private String surname;
 

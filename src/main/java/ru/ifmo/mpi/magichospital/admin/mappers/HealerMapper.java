@@ -21,13 +21,14 @@ public class HealerMapper {
 	public HealerLongDTO toLongDTO(Healer healer) {
 		HealerLongDTO dto = new HealerLongDTO();
 		
+		dto.setId(healer.getId());
     	dto.setName(healer.getName());
     	dto.setSurname(healer.getSurname());    	
     	dto.setMale(healer.isMale());
     	dto.setWorkStartDate(healer.getWorkStartDate());
     	dto.setSocialStatus(healer.getSocialStatus().getName());
     	dto.setHealerPower(healer.getHealerPower());
-    	dto.setQueue(healer.getHealerPower());
+    	dto.setQueue(healer.getQueue());
     	
     	return dto;
 	}

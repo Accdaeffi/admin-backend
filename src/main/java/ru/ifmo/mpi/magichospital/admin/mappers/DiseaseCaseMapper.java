@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Administrator;
+import ru.ifmo.mpi.magichospital.admin.domain.dao.Disease;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.DiseaseCase;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Healer;
 import ru.ifmo.mpi.magichospital.admin.domain.dao.Patient;
-import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.Disease;
 import ru.ifmo.mpi.magichospital.admin.domain.dto.DiseaseCaseDTO;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.DiseaseRepository;
 import ru.ifmo.mpi.magichospital.admin.domain.repository.HealerRepository;

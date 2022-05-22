@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
-import ru.ifmo.mpi.magichospital.admin.domain.dao.dict.Disease;
 
 @Entity
 @Data

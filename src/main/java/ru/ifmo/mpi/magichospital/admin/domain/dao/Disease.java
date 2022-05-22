@@ -1,4 +1,4 @@
-package ru.ifmo.mpi.magichospital.admin.domain.dao.dict;
+package ru.ifmo.mpi.magichospital.admin.domain.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

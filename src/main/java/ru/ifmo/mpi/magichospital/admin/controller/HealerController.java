@@ -64,7 +64,7 @@ public class HealerController {
 			  @ApiResponse(responseCode = "400", description = "No patient with such id. Full description in \"message\" field", 
 			    content = @Content) })
 	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/healer/{id}")
-	public HealerLongDTO getPatient(@PathVariable int id) 
+	public HealerLongDTO getHealer(@PathVariable int id) 
 			throws NoEntityWithSuchIdException {
 		Healer healer = healerService.getHealer(id);
 		return mapper.toLongDTO(healer);
