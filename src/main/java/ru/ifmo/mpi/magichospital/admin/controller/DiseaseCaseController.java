@@ -37,6 +37,8 @@ public class DiseaseCaseController {
 			  @ApiResponse(responseCode = "200", description = "Case created, returning disease case with id field", 
 			    content = { @Content(mediaType = "application/json", 
 			      schema = @Schema(implementation = DiseaseCaseDTO.class)) }),
+			  @ApiResponse(responseCode = "401", description = "Trying register as another registrator", 
+			    content = @Content),
 			  @ApiResponse(responseCode = "400", description = "Incorrect values (SQL injection, for example). Full description in \"message\" field", 
 			    content = @Content) })
 	@PostMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/case")

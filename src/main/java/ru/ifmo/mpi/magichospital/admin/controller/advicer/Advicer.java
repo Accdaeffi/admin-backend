@@ -15,6 +15,16 @@ import ru.ifmo.mpi.magichospital.admin.exception.PossibleSqlInjectionAttackExcep
 @ControllerAdvice
 public class Advicer {
 	
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<Object> handleException(SecurityException e) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("message", e.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
+	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(NoEntityWithSuchIdException.class)
     public ResponseEntity<Object> handleException(NoEntityWithSuchIdException e) {
