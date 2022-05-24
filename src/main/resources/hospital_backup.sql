@@ -5,7 +5,7 @@
 -- Dumped from database version 13.4
 -- Dumped by pg_dump version 13.4
 
--- Started on 2022-05-22 22:09:29
+-- Started on 2022-05-24 19:33:05
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -274,7 +274,8 @@ CREATE TABLE public.patient (
     is_male boolean DEFAULT true NOT NULL,
     registration_time timestamp without time zone NOT NULL,
     is_mage boolean DEFAULT false NOT NULL,
-    social_status integer NOT NULL
+    social_status integer NOT NULL,
+    patronymic character varying
 );
 
 
@@ -587,8 +588,8 @@ INSERT INTO public.login_info VALUES ('healer', '$2a$12$A1Zb0aOyxGLJH7YModCo8OHB
 -- Data for Name: patient; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.patient VALUES (1, 'Пациент', NULL, true, '2022-05-11 17:05:18.39405', false, 3);
-INSERT INTO public.patient VALUES (2, 'Поц', 'Пацев', true, '2022-05-15 17:05:18.39405', false, 1);
+INSERT INTO public.patient VALUES (1, 'Пациент', NULL, true, '2022-05-11 17:05:18.39405', false, 3, NULL);
+INSERT INTO public.patient VALUES (2, 'Поц', 'Пацев', true, '2022-05-15 17:05:18.39405', false, 1, NULL);
 
 
 --
@@ -597,8 +598,8 @@ INSERT INTO public.patient VALUES (2, 'Поц', 'Пацев', true, '2022-05-15 
 -- Data for Name: prayer; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.prayer VALUES (2, 1, 1, 1, 'Придумал', '2022-05-11 18:11:54.23321', 2);
-INSERT INTO public.prayer VALUES (1, 1, 1, 1, 'Не будь нехорошим богом, помоги, а, ну чо те стоит?', '2022-05-11 17:11:54.23321', 2);
+INSERT INTO public.prayer VALUES (2, 1, 1, 1, 'Придумал', '2022-05-11 18:11:54.23321', 1);
+INSERT INTO public.prayer VALUES (1, 1, 1, 1, 'Не будь нехорошим богом, помоги, а, ну чо те стоит?', '2022-05-11 17:11:54.23321', 1);
 
 
 --
@@ -1171,6 +1172,7 @@ GRANT SELECT ON TABLE public.administrator TO admin_backend;
 --
 
 GRANT SELECT,INSERT ON TABLE public.disease_case TO admin_backend;
+GRANT SELECT ON TABLE public.disease_case TO god_backend;
 
 
 --
@@ -1180,6 +1182,7 @@ GRANT SELECT,INSERT ON TABLE public.disease_case TO admin_backend;
 --
 
 GRANT SELECT ON TABLE public.disease_dict TO admin_backend;
+GRANT SELECT ON TABLE public.disease_dict TO god_backend;
 
 
 --
@@ -1259,7 +1262,7 @@ GRANT SELECT ON TABLE public.social_status_dict TO god_backend;
 GRANT SELECT ON TABLE public.social_status_dict TO admin_backend;
 
 
--- Completed on 2022-05-22 22:09:30
+-- Completed on 2022-05-24 19:33:06
 
 --
 -- PostgreSQL database dump complete
