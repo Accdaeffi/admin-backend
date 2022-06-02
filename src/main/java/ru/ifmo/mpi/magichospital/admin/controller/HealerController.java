@@ -61,7 +61,7 @@ public class HealerController {
 			  @ApiResponse(responseCode = "200", description = "Get healer", 
 			    content = { @Content(mediaType = "application/json", 
 			      schema = @Schema(implementation = HealerLongDTO.class)) }),
-			  @ApiResponse(responseCode = "400", description = "No patient with such id. Full description in \"message\" field", 
+			  @ApiResponse(responseCode = "400", description = "No healer with such id. Full description in \"message\" field", 
 			    content = @Content) })
 	@GetMapping(PathConstants.API_PREFIX+PathConstants.ADMIN_PREFIX+"/healer/{id}")
 	public HealerLongDTO getHealer(@PathVariable int id) 

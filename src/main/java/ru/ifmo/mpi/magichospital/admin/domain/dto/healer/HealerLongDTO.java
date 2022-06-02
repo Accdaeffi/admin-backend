@@ -12,9 +12,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 public class HealerLongDTO extends HealerShortDTO {
-	
-    private String name;
-    private String surname;
     
     @JsonProperty("isMale")
     private boolean isMale;

@@ -29,8 +29,7 @@ public class DiseaseCaseService {
 
 	public DiseaseCase addCase(DiseaseCaseDTO diseaseCaseDTO, String loggedAdministrator) 
 			throws NoEntityWithSuchIdException {
-		Optional<Administrator> optionalAdministrator = administratorRepository.findByLogin(loggedAdministrator);
-
+		Optional<Administrator> optionalAdministrator = administratorRepository.findById(diseaseCaseDTO.getRegistratorId());
 		Administrator admin = optionalAdministrator.get();
 		
 		try {
