@@ -31,6 +31,11 @@ public class PatientService {
 	@Autowired 
 	PatientMapper patientMapper;
 
+	/**
+	 * Получение списка из всех пациентов
+	 * 
+	 * @return Список пациентов
+	 */
 	public List<Patient> getPatients() {
 		
 		List<Patient> result = new ArrayList<>();
@@ -39,6 +44,13 @@ public class PatientService {
 		return result;
 	}
 	
+	/**
+	 * Получение списка из всех пациентов на основании строки поиска 
+	 * 
+	 * @param searchString Строка, разбивающаяся на 2 токена по первому пробелу. Осуществляется как поиск по "имя фамилия", так и "фамилия имя"
+	 * @return Список пациентов, удовлетворяющий условию поиска
+	 * @throws PossibleSqlInjectionAttackException Если в строке поиска есть SQL-инъекция
+	 */
 	public List<Patient> getPatientsByName(String searchString) 
 			throws PossibleSqlInjectionAttackException {
 		String[] tokens = searchString.split(" ", 2);
@@ -57,6 +69,13 @@ public class PatientService {
 		return patientRepository.findByTokens(token1, token2);
 	}
 
+	/**
+	 * Получение пациента по id
+	 * 
+	 * @param patientId
+	 * @return
+	 * @throws NoEntityWithSuchIdException
+	 */
 	public Patient getPatient(int patientId) 
 			throws NoEntityWithSuchIdException {
 		Optional<Patient> optionalPatient = patientRepository.findById(patientId);
@@ -67,6 +86,13 @@ public class PatientService {
 		}
 	}
 	
+	/**
+	 * Добавление нового пациента
+	 * 
+	 * @param patientDto Полученное DTO с описанием пациента
+	 * @return Зарегестрированного пациента из БД
+	 * @throws NoEntityWithSuchIdException Если нет такого социального статуса
+	 */
 	public Patient addPatient(PatientLongDTO patientDto) 
 			throws NoEntityWithSuchIdException {
 		

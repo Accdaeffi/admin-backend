@@ -15,6 +15,13 @@ public class DiseaseService {
 	@Autowired
 	DiseaseRepository repository;
 	
+	/**
+	 * Получение заболевания по его id
+	 * 
+	 * @param diseaseId
+	 * @return
+	 * @throws NoEntityWithSuchIdException
+	 */
 	public Disease getDisease(int diseaseId) 
 			throws NoEntityWithSuchIdException {
 		Optional<Disease> optionalDisease = repository.findById(diseaseId);

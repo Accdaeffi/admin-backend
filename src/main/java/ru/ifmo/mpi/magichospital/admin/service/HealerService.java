@@ -20,12 +20,24 @@ public class HealerService {
 	@Autowired
 	HealerRepository healerRepository;
 
+	/**
+	 * Получения списка из всех целителей
+	 * 
+	 * @return Список целителей
+	 */
 	public List<Healer> getHealers() {	
 		List<Healer> result = new ArrayList<>();
 		healerRepository.findAll().forEach(result::add);
 		return result;
 	}
 
+	/**
+	 * Получение списка целитей на основании строки поиска
+	 * 
+	 * @param searchString Строка, разбивающаяся на 2 токена по первому пробелу. Осуществляется как поиск по "имя фамилия", так и "фамилия имя"
+	 * @return Список целителей, удовлетворяющий условию поиска
+	 * @throws PossibleSqlInjectionAttackException Если в строке поиска есть SQL-инъекция
+	 */
 	public List<Healer> getHealersByName(String searchString) 
 			throws PossibleSqlInjectionAttackException {
 		String[] tokens = searchString.split(" ", 2);
@@ -44,6 +56,13 @@ public class HealerService {
 		return healerRepository.findByTokens(token1, token2);
 	}
 	
+	/**
+	 * Получение конкретного целителя по id
+	 *  
+	 * @param healerId
+	 * @return
+	 * @throws NoEntityWithSuchIdException
+	 */
 	public Healer getHealer(int healerId) 
 			throws NoEntityWithSuchIdException {
 		Optional<Healer> optionalHealer = healerRepository.findById(healerId);

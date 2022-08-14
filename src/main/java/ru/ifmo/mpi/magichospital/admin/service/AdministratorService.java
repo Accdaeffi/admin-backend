@@ -15,6 +15,13 @@ public class AdministratorService {
 	@Autowired
 	AdministratorRepository repository;
 	
+	/**
+	 * Получение администратора по id of
+	 * 
+	 * @param administratorId
+	 * @return
+	 * @throws NoEntityWithSuchIdException
+	 */
 	public Administrator getAdministrator(int administratorId) 
 			throws NoEntityWithSuchIdException {
 		Optional<Administrator> optionalAdministrator = repository.findById(administratorId);

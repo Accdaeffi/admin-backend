@@ -27,8 +27,17 @@ public class DiseaseCaseService {
 	@Autowired
 	DiseaseCaseMapper mapper;
 
+	/**
+	 * Добавление нового случая заболевания 
+	 * 
+	 * @param diseaseCaseDTO Описание нового случая заболевания
+	 * @param loggedAdministrator Указание, кто сказал добавить (для проверки добавки за другого человека)
+	 * @return Добавленный случай заболевания с указанием времени регистрации
+	 * @throws NoEntityWithSuchIdException Если нет такого пациента, врача или заболевания
+	 * @throws SecurityException Если есть попытка добавить за другого администратора
+	 */
 	public DiseaseCase addCase(DiseaseCaseDTO diseaseCaseDTO, String loggedAdministrator) 
-			throws NoEntityWithSuchIdException {
+			throws SecurityException, NoEntityWithSuchIdException {
 		Optional<Administrator> optionalAdministrator = administratorRepository.findById(diseaseCaseDTO.getRegistratorId());
 		Administrator admin = optionalAdministrator.get();
 		
