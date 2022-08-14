@@ -659,10 +659,10 @@ INSERT INTO public.resource_dict VALUES (3, 'Вино', 'wine', 3);
 -- Data for Name: role_dict; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.role_dict VALUES (1, 'Бог', 'god');
-INSERT INTO public.role_dict VALUES (2, 'Администратор', 'administrator');
-INSERT INTO public.role_dict VALUES (3, 'Лекарь', 'healer');
-INSERT INTO public.role_dict VALUES (4, 'Помощник', 'helper');
+INSERT INTO public.role_dict VALUES (1, 'Бог', 'GOD');
+INSERT INTO public.role_dict VALUES (2, 'Администратор', 'ADMIN');
+INSERT INTO public.role_dict VALUES (3, 'Лекарь', 'HEALER');
+INSERT INTO public.role_dict VALUES (4, 'Помощник', 'HELPER');
 
 
 --
